@@ -1,0 +1,19 @@
+actions:
+    - rules:
+        - config:
+            fields:
+                - columnTag: PII.Person Name
+                  type: columnTags
+            maskingConfig:
+                type: Hash
+            operator: any
+          type: Masking
+circumstanceOperator: any
+circumstances:
+    - columnTag: PII.Person Name
+      type: columnTags
+name: PII data
+policyKey: PII data
+staged: false
+template: false
+type: data

@@ -1,0 +1,60 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-2912 - SCM
+        https://pttep.atlassian.net/browse/SOSP-21443
+      rules:
+        - config:
+            predicate: ((@attributeValuesContains('EntraID.department', 'rls_department') or TrackingNumber_BEDNR ='OLG/M')) or (TrackingNumber_BEDNR is null and (@attributeValuesContains('EntraID.department', 'split( ContractHolderDepartmentSection_IHERZ, "/") [safe_offset(0)]') or ContractHolderDepartmentSection_IHERZ='OLG/M')) or ((@attributeValuesContains('EntraID.department', 'split( ContractHolderDepartmentSection_IHERZ, "/") [safe_offset(0)]') or ContractHolderDepartmentSection_IHERZ='OLG/M')) or  (@attributeValuesContains('EntraID.department', 'split( WBSOwner_VERNA, "/") [safe_offset(0)]') )
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: EMI
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: extract(year from PurchasingDocumentDate_BEDAT)<=2019
+          inclusions:
+            groups:
+                - delorean.dev.scm.developer@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            matches:
+                - attribute: EntraID.department
+                  tag: Data Entity.PO.Department
+                  type: attribute
+            operator: all
+          exceptions:
+            attributes:
+                - name: EntraID.department
+                  value: OPC
+                - name: EntraID.department
+                  value: OSS
+            groups:
+                - SCM Service Account
+                - delorean.dev.apihub.developer@pttep.com
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - ODC/S data analyst
+                - delorean.dev.scm.developer@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - apihub-bq@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - apihub-bq@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - pwp-bq-viewer@pttep-th-corp-pwp-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by User Entitlements
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.invoice_receipt
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+    - domains:
+        - id: 763d0faa-6746-4106-9c6a-c6981a5f35a8
+      type: domains
+name: 'Invoice receipt: Official Mart DEV'
+policyKey: 'Invoice receipt: Official Mart DEV'
+staged: false
+template: false
+type: data

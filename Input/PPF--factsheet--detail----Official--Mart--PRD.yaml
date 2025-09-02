@@ -1,0 +1,55 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-1512
+        https://pttep.atlassian.net/browse/GDS-1759
+        https://pttep.atlassian.net/browse/GDS-3198 - SCM Custodian
+      rules:
+        - config:
+            predicate: "true"
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: OSM
+                - name: EntraID.JobTitle
+                  value: SVP, Supply Chain Management Division
+                - name: EntraID.departments
+                  value: '- : -'
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          inclusions:
+            attributes:
+                - name: EntraID.departments
+                  value: 'OSS : OSS/P'
+                - name: EntraID.departments
+                  value: 'OSS : OSS/I'
+                - name: EntraID.departments
+                  value: 'OSS : -'
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          inclusions:
+            groups:
+                - Chanat Koaysomboon
+                - Jirapa Prakartchai
+                - dcoe.marketintelligence.datascience
+                - datasupport.ddo.supplychain@pttep.com
+                - scm.custodian.datauser
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "false"
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Environment.PRD
+      type: tags
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.ppf_factsheet_detail
+      type: tags
+name: 'PPF factsheet detail: Official Mart PRD'
+policyKey: 'PPF factsheet detail: Official Mart PRD'
+staged: false
+template: false
+type: data

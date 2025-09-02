@@ -1,0 +1,21 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-458
+      rules:
+        - config:
+            fields:
+                - columnTag: Data Entity.OCEANDATA.value
+                  type: columnTags
+            maskingConfig:
+                constant: "99.9"
+                type: Constant
+            operator: any
+          type: Masking
+circumstanceOperator: any
+circumstances:
+    - columnTag: Data Entity.OCEANDATA.value
+      type: columnTags
+name: ods_pi_oceanographic_water PRD
+policyKey: ods_pi_oceanographic_water PRD
+staged: true
+template: false
+type: data

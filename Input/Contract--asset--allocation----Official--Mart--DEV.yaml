@@ -1,0 +1,52 @@
+actions:
+    - description: |-
+          https://pttep.atlassian.net/browse/GDS-387
+          https://pttep.atlassian.net/browse/GDS-1084
+          https://pttep.atlassian.net/browse/GDS-1130
+          https://pttep.atlassian.net/browse/GDS-1119 - DDO-ENG
+          https://pttep.atlassian.net/browse/GDS-1271
+          https://pttep.atlassian.net/browse/GDS-3332 - add GGG/O
+      rules:
+        - config:
+            predicate: ( (ContractHolderDepartmentAbbr in ( 'OTF','OTN','OWE','OTF1','OWO' ) or ContractHolderDepartmentSection_IHERZ in ('OLG/M','OWO-QAQC')) or (ContractHolderDepartmentSection_IHERZ in ('GGG/O')) )
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTN
+                - name: EntraID.department
+                  value: OWE
+                - name: EntraID.department
+                  value: OTF1
+                - name: EntraID.department
+                  value: OWO
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: ( ContractHolderDepartmentAbbr in ('EAL', 'EAP', 'EAU', 'ECM', 'ECN', 'EDC', 'EDV', 'EFE', 'EME', 'EMI', 'EMX', 'ETS', 'EWP', 'EDP', 'ENX') or ContractHolderDepartmentSection_IHERZ in ('OLG/M')  )
+          inclusions:
+            groups:
+                - delorean.ddo.engineeringdevelopment.dataanalyst@pttep.com
+                - dataform-ddo-engineering@pttep-th-corp-dw-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: ( @attributeValuesContains('EntraID.department', 'ContractHolderDepartmentAbbr') or ContractHolderDepartmentSection_IHERZ = 'OLG/M' )
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.contract_asset_allocation
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+name: 'Contract asset allocation: Official Mart DEV'
+policyKey: 'Contract asset allocation: Official Mart DEV'
+staged: false
+template: false
+type: data

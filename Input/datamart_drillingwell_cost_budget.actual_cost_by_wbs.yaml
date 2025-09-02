@@ -1,0 +1,58 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-886
+        https://pttep.atlassian.net/browse/GDS-1098
+        https://pttep.atlassian.net/browse/GDS-1890
+        https://pttep.atlassian.net/browse/GDS-3143
+      rules:
+        - config:
+            predicate: "true"
+          inclusions:
+            attributes:
+                - name: EntraID.section
+                  value: OWO/P
+            groups:
+                - delorean.datamanagement.dwedl.production@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - dataform-ippt-dev@pttep-th-corp-ippt-dev.iam.gserviceaccount.com
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: split( resp_pers_des, "/") [safe_offset(0)] IN ('OFE','OFD','OTF','OTF1')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OFE
+                - name: EntraID.department
+                  value: OFD
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTF1
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''split( resp_pers_des, "/") [safe_offset(0)]'')'
+          inclusions:
+            attributes:
+                - name: EntraID.isPTTEP
+                  value: "true"
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "false"
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: DATAMART.DEV.drillingwell_cost_budget.actual_cost_by_wbs
+      type: tags
+    - tag: DATAMART.PRD.drillingwell_cost_budget.actual_cost_by_wbs
+      type: tags
+name: datamart_drillingwell_cost_budget.actual_cost_by_wbs
+policyKey: datamart_drillingwell_cost_budget.actual_cost_by_wbs
+staged: false
+template: false
+type: data

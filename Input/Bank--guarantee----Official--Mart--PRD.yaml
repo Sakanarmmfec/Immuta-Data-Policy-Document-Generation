@@ -1,0 +1,41 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-2684
+        https://pttep.atlassian.net/browse/GDS-3104 - Re-org
+        https://pttep.atlassian.net/browse/GDS-3198 - SCM Custodian
+      rules:
+        - config:
+            predicate: ( split( DepartmentSection_IHREZ, '/' ) [safe_offset(0)] in ( 'OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW' ) or DepartmentSection_IHREZ in ('OLG/M','OWO-QAQC')  )
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datauser@pttep.com
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+                - delorean.ippt.datasupport@pttep.com
+                - delorean.ippt.datauser@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''ContractHolderDepartmentAbbr'')'
+          exceptions:
+            groups:
+                - Chanat Koaysomboon
+                - Jirapa Prakartchai
+                - scm.custodian.datauser
+            operator: any
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Environment.PRD
+      type: tags
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.bank_guarantee
+      type: tags
+name: 'Bank guarantee: Official Mart PRD'
+policyKey: 'Bank guarantee: Official Mart PRD'
+staged: false
+template: false
+type: data

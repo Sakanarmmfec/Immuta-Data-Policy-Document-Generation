@@ -1,0 +1,203 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-256 - Chanat K. Access All
+        https://pttep.atlassian.net/browse/GDS-436
+        https://pttep.atlassian.net/browse/GDS-720 - Jirapa P. Access All
+        https://pttep.atlassian.net/browse/SOSP-16512 - ECM
+        https://pttep.atlassian.net/browse/GDS-936
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1119 - DDO-ENG
+        https://pttep.atlassian.net/browse/GDS-1764 - zsiripitchach@pttep.com
+        https://pttep.atlassian.net/browse/GDS-1811 - dcoe.dev.scmmarketplace.datadeveloper
+        https://pttep.atlassian.net/browse/GDS-1893
+        https://pttep.atlassian.net/browse/GDS-1890 - UAT IPPT
+        https://pttep.atlassian.net/browse/GDS-2490
+        https://pttep.atlassian.net/browse/GDS-2637
+        https://pttep.atlassian.net/browse/GDS-2666
+        https://pttep.atlassian.net/browse/SOSP-20240
+        https://pttep.atlassian.net/browse/GDS-2827 - intern ODT/M
+        https://pttep.atlassian.net/browse/GDS-2852 - Engineering Datamart Development
+        https://pttep.atlassian.net/browse/GDS-2884 - SCM DEV epr.aug2025
+        https://pttep.atlassian.net/browse/GDS-3058 - SCM Super user
+        https://pttep.atlassian.net/browse/GDS-3080 - gcp-pttep-dp-usr@gcp-pttep-th-it-dp-prd.iam.gserviceaccount.com
+        https://pttep.atlassian.net/browse/GDS-3104 - Re-org
+        https://pttep.atlassian.net/browse/GDS-3198 - SCM Custodian
+        https://pttep.atlassian.net/browse/GDS-3332 - add GGG/O for OWO/P
+        https://pttep.atlassian.net/browse/GDS-3373 - SCM
+        https://pttep.atlassian.net/browse/GDS-3414 - add GGG/O for OWO/P UAT
+        https://pttep.atlassian.net/browse/GDS-3452 - SCM composer
+        https://pttep.atlassian.net/browse/GDS-3491 - add GGG/O for OWO/P PRD
+      rules:
+        - config:
+            predicate: rls_department IN ('EDM','EFE','ECM','EWP','ETS','EME','EMX','EDC','EDV')
+          inclusions:
+            groups:
+                - delorean.datamanagement.eddl.production@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: rls_department IN ('ODT','ODC','OMS')
+          inclusions:
+            attributes:
+                - name: EntraID.section
+                  value: ODX/P
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            column:
+                name: Data Entity.PO.Department
+                type: tag
+            invert: false
+            predicate: '@columnTagged(''Data Entity.PO.Department'') IN (''EMI'',''OLG'',''OLG/M'',''EMX'',''EME'')'
+            values: '''EMI'',''OLG'',''OLG/M'',''EMX'',''EME'''
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: EMI
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: ( @attributeValuesContains('EntraID.department', 'rls_department') )
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: EFE
+                - name: EntraID.department
+                  value: ECM
+                - name: EntraID.department
+                  value: EWP
+                - name: EntraID.department
+                  value: ETS   
+                - name: EntraID.department
+                  value: EME
+                - name: EntraID.department
+                  value: EMX
+                - name: EntraID.department
+                  value: EDC
+                - name: EntraID.department
+                  value: EDV
+                - name: EntraID.division
+                  value: EDM
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            column:
+                name: Data Entity.PO.Department
+                type: tag
+            invert: false
+            predicate: '@columnTagged(''Data Entity.PO.Department'') IN (''EMI'',''OLG'',''OLG/M'',''EMX'',''EME'')'
+            values: '''EMI'',''OLG'',''OLG/M'',''EMX'',''EME'''
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: EMI
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: EXTRACT(YEAR FROM PurchasingDocumentDate_BEDAT) IN (2023,2024) OR EXTRACT(YEAR FROM POCreatedDate_AEDAT) IN (2023,2024)
+          inclusions:
+            groups:
+                - datamart_supplychain.datauser
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: (( rls_department in ( 'OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW' ) or RequisitionTrackingNumber_BEDNR ='OLG/M' ) or RequisitionTrackingNumber_BEDNR = 'GGG/O')
+          inclusions:
+            attributes:
+                - name: EntraID.section
+                  value: OWO/P
+            groups:
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - delorean.ippt.datasupport@pttep.com
+                - delorean.ippt.datauser@pttep.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: (( rls_department in ( 'OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW' ) or RequisitionTrackingNumber_BEDNR ='OLG/M' ))
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTN
+                - name: EntraID.department
+                  value: OWE
+                - name: EntraID.department
+                  value: OTF1
+                - name: EntraID.department
+                  value: OWO
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - delorean.ippt.datasupport@pttep.com
+                - delorean.ippt.datauser@pttep.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: (( rls_department in ('EAL', 'EAP', 'EAU', 'ECM', 'ECN', 'EDC', 'EDV', 'EFE', 'EME', 'EMI', 'EMX', 'ETS', 'EWP', 'EDP', 'ENX') or RequisitionTrackingNumber_BEDNR ='OLG/M' ))
+          inclusions:
+            groups:
+                - delorean.ddo.engineeringdevelopment.dataanalyst@pttep.com
+                - dataform-ddo-engineering@pttep-th-corp-dw-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            matches:
+                - attribute: EntraID.department
+                  tag: Data Entity.PO.Department
+                  type: attribute
+                - attribute: EntraID.section
+                  tag: Data Entity.PO.Department
+                  type: attribute
+            operator: any
+          exceptions:
+            attributes:
+                - name: EntraID.department
+                  value: OPC
+                - name: EntraID.department
+                  value: OSS
+            groups:
+                - SCM Service Account
+                - Chanat Koaysomboon
+                - delorean.uat.msm.developer@pttep.com
+                - msm-bq-viewer@pttep-th-corp-msm-uat.iam.gserviceaccount.com
+                - Jirapa Prakartchai
+                - dcoe.msm.datasupport
+                - msm-bq-viewer@pttep-th-corp-msm.iam.gserviceaccount.com
+                - datasupport.ddo.supplychain@pttep.com
+                - Siripitcha Charoensuk
+                - composer-scm-marketplace@gcp-pttep-th-it-dp-dev.iam.gserviceaccount.com
+                - dcoe.dev.scmmarketplace.datadeveloper
+                - apihub-bq-scm@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - apihub-bq@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - ODT/M Intern
+                - apihub-bq-scm@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - apihub-bq@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - gcp-pttep-dp-usr@gcp-pttep-th-it-dp-prd.iam.gserviceaccount.com
+                - scm.custodian.datauser
+                - apihub-bq@pttep-th-corp-apihub.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub.iam.gserviceaccount.com
+                - composer-scm-marketplace@gcp-pttep-th-it-dp-uat.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by User Entitlements
+circumstanceOperator: all
+circumstances:
+    - tag: Environment.PRD
+      type: tags
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.pr
+      type: tags
+    - domains:
+        - name: Procurement
+      type: domains
+name: 'PR: Official Mart PRD'
+policyKey: 'PR: Official Mart PRD'
+staged: false
+template: false
+type: data

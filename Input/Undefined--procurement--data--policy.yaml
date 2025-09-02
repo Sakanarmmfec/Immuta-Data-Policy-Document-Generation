@@ -1,0 +1,28 @@
+actions:
+    - rules:
+        - config:
+            predicate: '@columnTagged(''Data Entity.PO.Plant'')=''4101'' AND @columnTagged(''Data Entity.PO.Date'') < ''2014-01-01'''
+          exceptions:
+            attributes:
+                - name: EntraID.department
+                  value: OPC
+                - name: EntraID.department
+                  value: OSS
+            operator: all
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.invoice_receipt
+      type: tags
+    - columnTag: Data Entity.PO.Plant
+      type: columnTags
+    - columnTag: Data Entity.PO.Date
+      type: columnTags
+    - domains:
+        - id: 763d0faa-6746-4106-9c6a-c6981a5f35a8
+      type: domains
+name: Undefined procurement data policy
+policyKey: Undefined procurement data policy
+staged: true
+template: false
+type: data

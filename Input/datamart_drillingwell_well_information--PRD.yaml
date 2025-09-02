@@ -1,0 +1,70 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-1257
+        https://pttep.atlassian.net/browse/GDS-1519
+        https://pttep.atlassian.net/browse/GDS-1706
+      rules:
+        - config:
+            predicate: 1=1
+          inclusions:
+            groups:
+                - delorean.developer.dwe.useme.datalake@pttep.com
+                - delorean.dataanalyst.dwedl.production@pttep.com
+                - delorean.datamanagement.dwedl.production@pttep.com
+                - delorean.uat.gotdatafoundation.dataanalyst@pttep.com
+                - delorean.uat.gotdatafoundation.datadeveloper@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset IN ('G1/61')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFP1
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset IN  ('G2/61')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFP2
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset IN  ('ARTHIT')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFP3
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: LocationBase = 'ONSHORE'
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PNP
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset = 'G2/61'
+          inclusions:
+            groups:
+                - nimbus-pedb-g261@gcp-pttep-th-it-dp-prd.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: DATAMART.PRD.drillingwell_well_information
+      type: tags
+    - tag: gcp-pttep-th-it-dp-prd.datamart_drillingwell_well_information
+      type: tags
+name: datamart_drillingwell_well_information PRD
+policyKey: datamart_drillingwell_well_information PRD
+staged: false
+template: false
+type: data

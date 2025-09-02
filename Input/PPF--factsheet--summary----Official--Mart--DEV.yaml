@@ -1,0 +1,33 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-2415
+      rules:
+        - config:
+            predicate: Authorization = 'OWO'
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - dataform-ippt-dev@pttep-th-corp-ippt-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.ppf_factsheet_summary
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+    - tag: TABLETAG.DATAMART.DEV.supplychain_procurement.ppf_factsheet_summary
+      type: tags
+    - domains:
+        - name: Procurement
+      type: domains
+name: 'PPF factsheet summary: Official Mart DEV'
+policyKey: 'PPF factsheet summary: Official Mart DEV'
+staged: false
+template: false
+type: data

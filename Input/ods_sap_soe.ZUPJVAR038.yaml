@@ -1,0 +1,17 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-919
+      rules:
+        - config:
+            predicate: Project = 'GS1'
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: ODS.PRD.SAP.soe
+      type: tags
+    - tag: ODS.DEV.SAP.soe
+      type: tags
+name: 'ods_sap_soe.ZUPJVAR038'
+policyKey: 'ods_sap_soe.ZUPJVAR038'
+staged: false
+template: false
+type: data

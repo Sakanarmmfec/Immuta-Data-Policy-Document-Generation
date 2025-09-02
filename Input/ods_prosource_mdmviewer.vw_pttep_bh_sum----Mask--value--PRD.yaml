@@ -1,0 +1,65 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-908
+      rules:
+        - config:
+            fields:
+                - columnTag: Data Entity.PROSOURCE_MDMVIEWER.value
+                  type: columnTags
+            maskingConfig:
+                sqlFunction: SAFE_CAST(REPLACE(REGEXP_REPLACE(CAST(@column AS STRING), r'^-?\d+(\.\d+)?$', '9999'), ',', '') AS NUMERIC)
+                type: Custom Function
+            operator: any
+          exceptions:
+            groups:
+                - dataform-mdm-prd@gcp-pttep-th-it-mdm.iam.gserviceaccount.com
+                - dataformdeployer-dp-prd@gcp-pttep-th-it-dp-prd.iam.gserviceaccount.com
+            operator: any
+          type: Masking
+    - description: https://pttep.atlassian.net/browse/GDS-908
+      rules:
+        - config:
+            fields:
+                - columnTag: Data Entity.PROSOURCE_MDMVIEWER.text
+                  type: columnTags
+            maskingConfig:
+                type: Hash
+            operator: any
+          exceptions:
+            groups:
+                - dataform-mdm-prd@gcp-pttep-th-it-mdm.iam.gserviceaccount.com
+                - dataformdeployer-dp-prd@gcp-pttep-th-it-dp-prd.iam.gserviceaccount.com
+            operator: any
+          type: Masking
+    - description: https://pttep.atlassian.net/browse/GDS-908
+      rules:
+        - config:
+            fields:
+                - columnTag: Data Entity.PROSOURCE_MDMVIEWER.timestamp
+                  type: columnTags
+            maskingConfig:
+                type: "Null"
+            operator: any
+          exceptions:
+            groups:
+                - dataform-mdm-prd@gcp-pttep-th-it-mdm.iam.gserviceaccount.com
+                - dataformdeployer-dp-prd@gcp-pttep-th-it-dp-prd.iam.gserviceaccount.com
+            operator: any
+          type: Masking
+    - rules:
+        - config:
+            fields:
+                - columnTag: New
+                  type: columnTags
+            maskingConfig:
+                type: "Null"
+            operator: any
+          type: Masking
+circumstanceOperator: any
+circumstances:
+    - columnTag: Data Entity.PROSOURCE_MDMVIEWER.value
+      type: columnTags
+name: 'ods_prosource_mdmviewer.vw_pttep_bh_sum: Mask value PRD'
+policyKey: 'ods_prosource_mdmviewer.vw_pttep_bh_sum: Mask value PRD'
+staged: false
+template: false
+type: data

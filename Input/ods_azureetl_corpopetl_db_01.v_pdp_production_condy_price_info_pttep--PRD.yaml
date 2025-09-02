@@ -1,0 +1,22 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-744
+      rules:
+        - config:
+            predicate: Asset = 'G2/61'
+          inclusions:
+            groups:
+                - delorean.datauser.g261.padl.production@pttep.com 
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: TABLETAG.ODS.PRD.AZUREETL.corpopetl_db_01.v_pdp_production_condy_price_info_pttep
+      type: tags
+name: ods_azureetl_corpopetl_db_01.v_pdp_production_condy_price_info_pttep PRD
+policyKey: ods_azureetl_corpopetl_db_01.v_pdp_production_condy_price_info_pttep PRD
+staged: false
+template: false
+type: data

@@ -1,0 +1,22 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-1472
+      rules:
+        - config:
+            predicate: Asset IN  ('G2/61')
+          inclusions:
+            groups:
+                - nimbus-pedb-g261@gcp-pttep-th-it-dp-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: TABLETAG.DATAMART.DEV.drillingwell_drilling_operation.hole_section
+      type: tags
+name: datamart_drillingwell_drilling_operation.hole_section DEV
+policyKey: datamart_drillingwell_drilling_operation.hole_section DEV
+staged: false
+template: false
+type: data

@@ -1,0 +1,36 @@
+actions:
+    - description: |-
+          https://pttep.atlassian.net/browse/GDS-2271
+          https://pttep.atlassian.net/browse/GDS-2276
+      rules:
+        - config:
+            matches:
+                - attribute: EntraID.department
+                  tag: Data Entity.PO.Department
+                  type: attribute
+            operator: all
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: ECM
+            operator: all
+          type: Row Restriction by User Entitlements
+        - config:
+            predicate: rls_department = 'ECM'
+          inclusions:
+            groups:
+                - ECM DT.datadeveloper
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: DATAPOLICY.PRD.datamart_supplychain_logistic.expedite_material_tracking
+      type: tags
+name: DataPolicy PRD datamart_supplychain_logistic.expedite_material_tracking
+policyKey: DataPolicy PRD datamart_supplychain_logistic.expedite_material_tracking
+staged: false
+template: false
+type: data

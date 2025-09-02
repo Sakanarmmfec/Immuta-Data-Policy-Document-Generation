@@ -1,0 +1,21 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-810
+      rules:
+        - config:
+            predicate: UPPER(project_name) LIKE '%G1/61%'
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: REFINED.PRD.SHAREPOINT.autowellproposal.netpay_reserves_prediction
+      type: tags
+    - tag: REFINED.PRD.SHAREPOINT.autowellproposal.gpdp
+      type: tags
+    - tag: REFINED.PRD.SHAREPOINT.autowellproposal.well_batch
+      type: tags
+    - tag: REFINED.PRD.SHAREPOINT.autowellproposal.batch_by_well
+      type: tags
+name: refined_sharepoint_autowellproposal PRD
+policyKey: refined_sharepoint_autowellproposal PRD
+staged: false
+template: false
+type: data

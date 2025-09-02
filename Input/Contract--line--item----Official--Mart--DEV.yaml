@@ -1,0 +1,64 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-175
+        https://pttep.atlassian.net/browse/GDS-362
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1119 - DDO-ENG
+        https://pttep.atlassian.net/browse/GDS-1205
+      rules:
+        - config:
+            predicate: "  ( split( ContractHolderDepartment_IHREZ, '/' ) [safe_offset(0)] in ( 'OTF','OTN','OWE','OTF1','OWO' ) \n     or ContractHolderDepartment_IHREZ in ('OLG/M' ) )"
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTN
+                - name: EntraID.department
+                  value: OWE
+                - name: EntraID.department
+                  value: OTF1
+                - name: EntraID.department
+                  value: OWO
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "  ( split( ContractHolderDepartment_IHREZ, '/' ) [safe_offset(0)] in ('EAL', 'EAP', 'EAU', 'ECM', 'ECN', 'EDC', 'EDV', 'EFE', 'EME', 'EMI', 'EMX', 'ETS', 'EWP', 'EDP', 'ENX') \n     or ContractHolderDepartment_IHREZ in ('OLG/M' ) )"
+          inclusions:
+            groups:
+                - delorean.ddo.engineeringdevelopment.dataanalyst@pttep.com
+                - dataform-ddo-engineering@pttep-th-corp-dw-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: split( ContractHolderDepartment_IHREZ, '/' ) [safe_offset(0)] in ('EME','EMX','PS1','PFO1','PFO2','PFO3','EMI','ECM','OMI')
+          inclusions:
+            groups:
+                - dev.msm.datadeveloper@pttep.com
+                - msm-bq-viewer@pttep-th-corp-msm-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''split( ContractHolderDepartment_IHREZ, "/") [safe_offset(0)]'') or ContractHolderDepartment_IHREZ=''OLG/M'''
+          exceptions:
+            groups:
+                - ODC/S data analyst
+                - delorean.dev.apihub.developer@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.contract_line_item
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+name: 'Contract line item: Official Mart DEV'
+policyKey: 'Contract line item: Official Mart DEV'
+staged: false
+template: false
+type: data

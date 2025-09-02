@@ -1,0 +1,15 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-737
+      rules:
+        - config:
+            predicate: TABNAME in ('QMFE', 'QMUR')
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: ODS.PRD.SAP_ECC.pur.CDPOS
+      type: tags
+name: ods_sap_ecc_pur.CDPOS PRD
+policyKey: ods_sap_ecc_pur.CDPOS PRD
+staged: false
+template: false
+type: data

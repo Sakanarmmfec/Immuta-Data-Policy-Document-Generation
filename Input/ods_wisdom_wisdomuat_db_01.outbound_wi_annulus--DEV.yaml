@@ -1,0 +1,22 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-1476
+      rules:
+        - config:
+            predicate: ASSET = 'G1/61'
+          inclusions:
+            groups:
+                - nimbus-pedb-161@gcp-pttep-th-it-dp-dev.iam.gserviceaccount.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: TABLETAG.ODS.DEV.WISDOM.wisdomuat_db_01.outbound_wi_annulus
+      type: tags
+name: ods_wisdom_wisdomuat_db_01.outbound_wi_annulus DEV
+policyKey: ods_wisdom_wisdomuat_db_01.outbound_wi_annulus DEV
+staged: false
+template: false
+type: data

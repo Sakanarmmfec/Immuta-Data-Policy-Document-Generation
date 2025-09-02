@@ -1,0 +1,115 @@
+actions:
+    - description: |
+        https://pttep.atlassian.net/browse/GDS-256 - Chanat K. Access All
+        https://pttep.atlassian.net/browse/GDS-720 - Jirapa P. Access All
+        https://pttep.atlassian.net/browse/SOSP-16512 - ECM
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1890 - UAT IPPT
+        https://pttep.atlassian.net/browse/GDS-1987 - ECM
+        https://pttep.atlassian.net/browse/GDS-2246 - ECM
+        https://pttep.atlassian.net/browse/GDS-2481 - Siripitcha Ch./SA API Access All
+        https://pttep.atlassian.net/browse/GDS-2490 - filter OWO
+        https://pttep.atlassian.net/browse/GDS-2666
+        https://pttep.atlassian.net/browse/GDS-2852 - Engineering Datamart Development
+        https://pttep.atlassian.net/browse/GDS-3104 - Re-org
+        https://pttep.atlassian.net/browse/GDS-3198 - SCM Custodian
+        https://pttep.atlassian.net/browse/SOSP-21446 - PWP SA
+        https://pttep.atlassian.net/browse/SOSP-21444 - PWP SA UAT
+      rules:    
+        - config:
+            predicate: "( \n   (  \n      rls_department IN ( 'EDM','EFE','ECM','EWP','ETS','EME','EMX','EDC','EDV' )\n   )\n    OR\n   ( DocumentCategory_BSTYP IN ('F') AND\n     (\n       ( SPLIT( ContractHolderDepartmentSection_IHERZ,'/') [SAFE_OFFSET(0)] IN ( 'EDM','EFE','ECM','EWP','ETS','EME','EMX','EDC','EDV' )\n       )\n     )\n   )\n   OR\n   ( DocumentCategory_BSTYP IN ('K') AND\n      ( SPLIT( ContractHolderDepartmentSection_IHERZ,'/') [SAFE_OFFSET(0)] IN ( 'EDM','EFE','ECM','EWP','ETS','EME','EMX','EDC','EDV' )\n      )\n   )\n   OR\n   (\n     SPLIT( WBSOwner_VERNA,'/') [SAFE_OFFSET(0)] IN ( 'EDM','EFE','ECM','EWP','ETS','EME','EMX','EDC','EDV' )\n   )\n   OR\n  (\n     PurchasingNumber_EBELN = '3300020594'\n   )\n )\n"
+          inclusions:
+            groups:
+                - delorean.datamanagement.eddl.production@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause 
+        - config:
+            predicate: "( \n   (  \n      @attributeValuesContains('EntraID.department', 'rls_department')\n   )\n    OR\n   ( DocumentCategory_BSTYP IN ('F') AND\n     (\n       ( @attributeValuesContains('EntraID.department', 'SPLIT( ContractHolderDepartmentSection_IHERZ,\"/\") [SAFE_OFFSET(0)]') \n       )\n     )\n   )\n   OR\n   ( DocumentCategory_BSTYP IN ('K') AND\n      ( @attributeValuesContains('EntraID.department', 'SPLIT( ContractHolderDepartmentSection_IHERZ,\"/\") [SAFE_OFFSET(0)]') \n      )\n   )\n   OR\n   (\n     @attributeValuesContains('EntraID.department', 'SPLIT( WBSOwner_VERNA,\"/\") [SAFE_OFFSET(0)]') \n   )\n   OR\n  (\n     PurchasingNumber_EBELN = '3300020594'\n   )\n )\n"
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: EFE
+                - name: EntraID.department
+                  value: ECM
+                - name: EntraID.department
+                  value: EWP
+                - name: EntraID.department
+                  value: ETS   
+                - name: EntraID.department
+                  value: EME
+                - name: EntraID.department
+                  value: EMX
+                - name: EntraID.department
+                  value: EDC
+                - name: EntraID.department
+                  value: EDV
+                - name: EntraID.division
+                  value: EDM
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "((@attributeValuesContains('EntraID.department', 'rls_department') or TrackingNumber_BEDNR ='OLG/M')) or (TrackingNumber_BEDNR is null and (@attributeValuesContains('EntraID.department', 'split( ContractHolderDepartmentSection_IHERZ, \"/\") [safe_offset(0)]') or ContractHolderDepartmentSection_IHERZ='OLG/M')) or ((@attributeValuesContains('EntraID.department', 'split( ContractHolderDepartmentSection_IHERZ, \"/\") [safe_offset(0)]') or ContractHolderDepartmentSection_IHERZ='OLG/M')) or \n(@attributeValuesContains('EntraID.department', 'split( WBSOwner_VERNA, \"/\") [safe_offset(0)]') )"
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: EMI
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: EXTRACT(YEAR FROM PurchasingDocumentDate_BEDAT) IN (2023,2024)
+          inclusions:
+            groups:
+                - datamart_supplychain.datauser
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "(\n  ( DocumentCategory_BSTYP IN ('F') AND \n    ( rls_department IN ('OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW') OR TrackingNumber_BEDNR IN ('OLG/M'))\n    )\n  OR\n  ( DocumentCategory_BSTYP IN ('F') AND\n    (\n      ( SPLIT( ContractHolderDepartmentSection_IHERZ,'/') [SAFE_OFFSET(0)] IN ('OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW') OR (ContractHolderDepartmentSection_IHERZ IN ( 'OLG/M' ))\n    )\n  )\n)\nOR\n( DocumentCategory_BSTYP IN ('K') AND\n  ( SPLIT( ContractHolderDepartmentSection_IHERZ,'/') [SAFE_OFFSET(0)] IN ('OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW') OR (ContractHolderDepartmentSection_IHERZ IN ('OLG/M'))\n  )\n)\nOR\n( \n    SPLIT( WBSOwner_VERNA,'/') [SAFE_OFFSET(0)] IN ('OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW')\n  )\n)\n"
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OWO
+            groups:
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+                - delorean.ippt.datasupport@pttep.com
+                - delorean.ippt.datauser@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''rls_department'')'
+          exceptions:
+            attributes:
+                - name: EntraID.department
+                  value: OPC
+                - name: EntraID.department
+                  value: OSS
+            groups:
+                - SCM Service Account
+                - Chanat Koaysomboon
+                - Jirapa Prakartchai
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - datasupport.ddo.supplychain@pttep.com
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - Siripitcha Charoensuk
+                - apihub-bq-scm@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - apihub-bq@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - scm.custodian.datauser
+                - pwp-bq-viewer@pttep-th-corp-pwp.iam.gserviceaccount.com
+                - pwp-bq-viewer@pttep-th-corp-pwp-uat.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.invoice_receipt
+      type: tags
+    - tag: Environment.PRD
+      type: tags
+    - domains:
+        - name: Procurement
+      type: domains
+name: 'New Invoice receipt: Official Mart PRD'
+policyKey: 'New Invoice receipt: Official Mart PRD'
+staged: false
+template: false
+type: data

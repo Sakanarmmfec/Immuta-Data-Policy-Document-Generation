@@ -1,0 +1,21 @@
+actions:
+    accessGrant: READ
+    allowDiscovery: false
+    automaticSubscription: true
+    entitlements:
+        groups:
+            - ODC-S Staff
+        operator: all
+    shareResponsibility: false
+    type: entitlements
+circumstanceOperator: all
+circumstances:
+    - tag: ODS.ods_pdms_arthit_hq_datastore
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+name: Operations Engineering Arthit PDMS
+policyKey: Operations Engineering Arthit PDMS
+staged: true
+template: false
+type: subscription

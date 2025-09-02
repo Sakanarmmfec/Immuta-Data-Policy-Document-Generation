@@ -1,0 +1,89 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-174
+        https://pttep.atlassian.net/browse/GDS-362
+        https://pttep.atlassian.net/browse/GDS-569
+        https://pttep.atlassian.net/browse/GDS-696
+        https://pttep.atlassian.net/browse/GDS-699
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1119 - DDO-ENG
+        https://pttep.atlassian.net/browse/GDS-1205
+        https://pttep.atlassian.net/browse/GDS-2912 - SCM
+        https://pttep.atlassian.net/browse/SOSP-21443 - PWP SA DEV
+        https://pttep.atlassian.net/browse/GDS-3332 - add GGG/O
+      rules:
+        - config:
+            predicate: split('DepartmentSection_IHREZ',"/")[safe_offset(0)] in ('EMI','PFO2','ECM') or DepartmentSection_IHREZ in ('OLG/M' ) or REGEXP_CONTAINS(Plant_WERKS, ('1101|1102|1103|1602'))
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFO2
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: split(DepartmentSection_IHREZ,"/")[safe_offset(0)] in ('EME','EMX','PS1','PFO1','PFO2','PFO3','EMI','ECM','OMI')
+          inclusions:
+            groups:
+                - dev.msm.datadeveloper@pttep.com
+                - msm-bq-viewer@pttep-th-corp-msm-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: ( (split( DepartmentSection_IHREZ, '/' ) [safe_offset(0)] in ( 'OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW' ) or DepartmentSection_IHREZ in ('OLG/M','OWO-QAQC')) or (DepartmentSection_IHREZ IN ('GGG/O') ) )
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTN
+                - name: EntraID.department
+                  value: OWE
+                - name: EntraID.department
+                  value: OTF1
+                - name: EntraID.department
+                  value: OWO
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: ( split( DepartmentSection_IHREZ, '/' ) [safe_offset(0)] in  ('EAL', 'EAP', 'EAU', 'ECM', 'ECN', 'EDC', 'EDV', 'EFE', 'EME', 'EMI', 'EMX', 'ETS', 'EWP', 'EDP', 'ENX') or DepartmentSection_IHREZ in ('OLG/M')  )
+          inclusions:
+            groups:
+                - delorean.ddo.engineeringdevelopment.dataanalyst@pttep.com
+                - dataform-ddo-engineering@pttep-th-corp-dw-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''split( DepartmentSection_IHREZ, "/") [safe_offset(0)]'') or DepartmentSection_IHREZ=''OLG/M'''
+          exceptions:
+            groups:
+                - ODC/S data analyst
+                - delorean.dev.apihub.developer@pttep.com
+                - dev.sshecn.datadeveloper@pttep.com
+                - dev.sshecn.datamanagement@pttep.com
+                - dataform-sshecn-dev@pttep-th-corp-sshecn-dev.iam.gserviceaccount.com
+                - sshecn-bq-viewer@pttep-th-corp-sshecn-dev.iam.gserviceaccount.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - delorean.dev.scm.developer@pttep.com
+                - apihub-bq@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - apihub-bq@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - pwp-bq-viewer@pttep-th-corp-pwp-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.contract
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+name: 'Contract: Official Mart DEV'
+policyKey: 'Contract: Official Mart DEV'
+staged: false
+template: false
+type: data

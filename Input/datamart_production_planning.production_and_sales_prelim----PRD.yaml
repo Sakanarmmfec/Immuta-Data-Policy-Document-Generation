@@ -1,0 +1,44 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-1652
+        https://pttep.atlassian.net/browse/SOSP-21931 - IOCC
+      rules:
+        - config:
+            predicate: asset in ('GBN', 'GBS', 'G2/61', 'Arthit & G8/50', 'G1/61', 'G12/48', 'Sinphuhorm', 'SB H', 'SB K', 'SK', 'S1', 'Zawtika')
+          inclusions:
+            groups:
+                - got_and_ndr.datauser
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: asset in ('GBN', 'GBS', 'G2/61', 'Arthit & G8/50', 'G1/61', 'G12/48')
+          inclusions:
+            groups:
+                - dataform-iocc-uat@pttep-th-corp-dp-uat.iam.gserviceaccount.com
+                - delorean.ddo.got.data-analyst@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: asset in ('Arthit & G8/50','G2/61','G1/61', 'Sinphuhorm','SB H','SB K','SK','S1','Zawtika')
+          inclusions:
+            groups:
+                - dataform-ndr-uat@pttep-th-corp-ndr-uat.iam.gserviceaccount.com
+                - dev.ndr.datadeveloper@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: DATAMART.PRODUCTION PLANNING.production_and_sales_prelim
+      type: tags
+    - tag: Environment.PRD
+      type: tags
+name: 'datamart_production_planning.production_and_sales_prelim: PRD'
+policyKey: 'datamart_production_planning.production_and_sales_prelim: PRD'
+staged: false
+template: false
+type: data
+
+

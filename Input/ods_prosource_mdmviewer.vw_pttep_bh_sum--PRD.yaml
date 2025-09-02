@@ -1,0 +1,139 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-908
+        https://pttep.atlassian.net/browse/GDS-999
+      rules:
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME LIKE 'ARTHIT%' OR PROJECT_NAME IN ("G1/61") OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+                - delorean.datamanagement.g161.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME LIKE 'ARTHIT%' OR PROJECT_NAME IN ("G1/61")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+                - delorean.datamanagement.g161.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME LIKE 'ARTHIT%' OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME IN ("G1/61") OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.g161.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME LIKE 'ARTHIT%' OR PROJECT_NAME IN ("G1/61") OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+                - delorean.datamanagement.g161.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME LIKE 'ARTHIT%'
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME IN ("G1/61")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.g161.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61") OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME LIKE 'ARTHIT%' OR PROJECT_NAME IN ("G1/61")
+          inclusions:
+            groups:
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+                - delorean.datamanagement.g161.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME LIKE 'ARTHIT%' OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("G1/61") OR PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g161.padl.production@pttep.com
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME LIKE 'ARTHIT%'
+          inclusions:
+            groups:
+                - delorean.datamanagement.arthit.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("BONGKOT", "G2/61")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g261.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("G1/61")
+          inclusions:
+            groups:
+                - delorean.datamanagement.g161.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: PROJECT_NAME IN ("S1")
+          inclusions:
+            groups:
+                - delorean.datamanagement.s1.padl.production@pttep.com
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: ODS.PRD.PROSOURCE.mdmviewer.vw_pttep_bh_sum
+      type: tags
+name: ods_prosource_mdmviewer.vw_pttep_bh_sum PRD
+policyKey: ods_prosource_mdmviewer.vw_pttep_bh_sum PRD
+staged: false
+template: false
+type: data

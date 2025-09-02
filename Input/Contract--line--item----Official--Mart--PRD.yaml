@@ -1,0 +1,146 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-256 - Chanat K. Access All
+        https://pttep.atlassian.net/browse/GDS-436
+        https://pttep.atlassian.net/browse/GDS-720 - Jirapa P. Access All
+        https://pttep.atlassian.net/browse/SOSP-16512 - ECM
+        https://pttep.atlassian.net/browse/GDS-936
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1119 - DDO-ENG
+        https://pttep.atlassian.net/browse/GDS-1205
+        https://pttep.atlassian.net/browse/GDS-1890 - UAT IPPT
+        https://pttep.atlassian.net/browse/GDS-2490
+        https://pttep.atlassian.net/browse/GDS-2666
+        https://pttep.atlassian.net/browse/GDS-2852 - Engineering Datamart Development
+        https://pttep.atlassian.net/browse/GDS-3058 - SCM Super user
+        https://pttep.atlassian.net/browse/GDS-3104 - Re-org
+        https://pttep.atlassian.net/browse/GDS-3122 - add PPD for MSM
+        https://pttep.atlassian.net/browse/GDS-3198 - SCM Custodian
+        https://pttep.atlassian.net/browse/GDS-3250 - zSiripitchaCh with exp
+      rules:
+        - config:
+            predicate: split(ContractHolderDepartment_IHREZ, '/')[safe_offset(0)] IN ('EDM','EFE','ECM','EWP','ETS','EME','EMX','EDC','EDV')
+          inclusions:
+            groups:
+                - delorean.datamanagement.eddl.production@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: split(ContractHolderDepartment_IHREZ, '/')[safe_offset(0)] IN ('EMI','EME','EMX') OR ContractHolderDepartment_IHREZ IN ('OLG/M')
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: EMI
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''split(ContractHolderDepartment_IHREZ, "/") [safe_offset(0)]'')'
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: EFE
+                - name: EntraID.department
+                  value: ECM
+                - name: EntraID.department
+                  value: EWP
+                - name: EntraID.department
+                  value: ETS
+                - name: EntraID.department
+                  value: EME
+                - name: EntraID.department
+                  value: EMX
+                - name: EntraID.department
+                  value: EDC
+                - name: EntraID.department
+                  value: EDV
+                - name: EntraID.division
+                  value: EDM
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: EXTRACT(YEAR FROM DocumentDate_BEDAT) IN (2024,2025)
+          inclusions:
+            groups:
+                - datamart_supplychain.datauser
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: split( ContractHolderDepartment_IHREZ, '/' ) [safe_offset(0)] in ('EME','EMX','PS1','PFO1','PFO2','PFO3','EMI','ECM','OMI','PPD')
+          inclusions:
+            groups:
+                - delorean.uat.msm.developer@pttep.com
+                - msm-bq-viewer@pttep-th-corp-msm-uat.iam.gserviceaccount.com
+                - dcoe.msm.datasupport
+                - msm-bq-viewer@pttep-th-corp-msm.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "( split( ContractHolderDepartment_IHREZ, '/' ) [safe_offset(0)] in ( 'OTF','OTN','OWE','OTF1','OWO','OFE','OFD','OFW' ) \n     or ContractHolderDepartment_IHREZ in ('OLG/M' ) )"
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTN
+                - name: EntraID.department
+                  value: OWE
+                - name: EntraID.department
+                  value: OTF1
+                - name: EntraID.department
+                  value: OWO
+                - name: EntraID.division
+                  value: OWO
+                - name: EntraID.department
+                  value: OFE
+                - name: EntraID.division
+                  value: OFD
+                - name: EntraID.division
+                  value: OFW
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - delorean.ippt.datasupport@pttep.com
+                - delorean.ippt.datauser@pttep.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "  ( split( ContractHolderDepartment_IHREZ, '/' ) [safe_offset(0)] in ('EAL', 'EAP', 'EAU', 'ECM', 'ECN', 'EDC', 'EDV', 'EFE', 'EME', 'EMI', 'EMX', 'ETS', 'EWP', 'EDP', 'ENX') \n     or ContractHolderDepartment_IHREZ in ('OLG/M' ) )"
+          inclusions:
+            groups:
+                - delorean.ddo.engineeringdevelopment.dataanalyst@pttep.com
+                - dataform-ddo-engineering@pttep-th-corp-dw-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: '@attributeValuesContains(''EntraID.department'', ''split(ContractHolderDepartment_IHREZ, "/") [safe_offset(0)]'')'
+          exceptions:
+            attributes:
+                - name: EntraID.department
+                  value: OPC
+                - name: EntraID.department
+                  value: OSS
+            groups:
+                - SCM Service Account
+                - Chanat Koaysomboon
+                - Jirapa Prakartchai
+                - datasupport.ddo.supplychain@pttep.com
+                - scm.custodian.datauser
+                - Siripitcha Charoensuk
+            operator: any
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.contract_line_item
+      type: tags
+    - tag: Environment.PRD
+      type: tags
+    - domains:
+        - name: Procurement
+      type: domains
+name: 'Contract line item: Official Mart PRD'
+policyKey: 'Contract line item: Official Mart PRD'
+staged: false
+template: false
+type: data

@@ -1,0 +1,15 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-729
+      rules:
+        - config:
+            predicate: ASSET in ('GBN','GBS','ARTHIT','G1','SABAH','SARAWAK')
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: DATAMART.PRD.sshe.environment_portal_report
+      type: tags
+name: datamart_sshe_environment_portal_report.seawater PRD
+policyKey: datamart_sshe_environment_portal_report.seawater PRD
+staged: false
+template: false
+type: data

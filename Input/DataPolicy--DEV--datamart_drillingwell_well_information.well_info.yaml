@@ -1,0 +1,24 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-2726
+      rules:
+        - config:
+            predicate: LocationBase = "OFFSHORE"
+          inclusions:
+            groups:
+                - dataform-drillpipe-dev@pttep-th-corp-drillpipe-dev.iam.gserviceaccount.com
+                - pbi-bq-viewer@pttep-th-corp-drillpipe-dev.iam.gserviceaccount.com
+                - dcoe.dev.drillpipe.datadeveloper
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: DATAPOLICY.DEV.datamart_drillingwell_well_information.well_info
+      type: tags
+name: DataPolicy DEV datamart_drillingwell_well_information.well_info
+policyKey: DataPolicy DEV datamart_drillingwell_well_information.well_info
+staged: false
+template: false
+type: data

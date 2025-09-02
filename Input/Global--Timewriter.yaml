@@ -1,0 +1,37 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-89
+        https://pttep.atlassian.net/browse/GDS-710
+      rules:
+        - config:
+            predicate: DeptName in ('ECM', 'EFE')
+          inclusions:
+            groups:
+                - delorean.ed.cost_monitoring.corp.user@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: DeptName LIKE 'E%'
+          inclusions:
+            groups:
+                - delorean.datamanagement.eddl.production@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            matches:
+                - attribute: EntraID.department
+                  tag: Data Entity.TIMEWRITE.Department
+                  type: attribute
+            operator: all
+          type: Row Restriction by User Entitlements
+circumstanceOperator: any
+circumstances:
+    - tag: REFINED.DEV.GLOBALTIMEWRITE.gbtimewrite db01
+      type: tags
+    - tag: REFINED.PRD.GLOBALTIMEWRITE.gbtimewrite db01
+      type: tags
+name: Global Timewriter DEV PRD
+policyKey: Global Timewriter
+staged: false
+template: false
+type: data

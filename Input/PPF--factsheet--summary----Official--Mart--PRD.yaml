@@ -1,0 +1,87 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-1512
+        https://pttep.atlassian.net/browse/GDS-1673
+        https://pttep.atlassian.net/browse/GDS-1759
+        https://pttep.atlassian.net/browse/GDS-1890 - UAT IPPT
+        https://pttep.atlassian.net/browse/GDS-2666
+        https://pttep.atlassian.net/browse/GDS-2490
+        https://pttep.atlassian.net/browse/GDS-3012 - SCM
+        https://pttep.atlassian.net/browse/GDS-3139 - SCM UAT Service Account
+        https://pttep.atlassian.net/browse/GDS-3198 - SCM Custodian
+        https://pttep.atlassian.net/browse/SOSP-21446 - PWP SA
+        https://pttep.atlassian.net/browse/SOSP-21444 - PWP SA UAT
+      rules:
+        - config:
+            predicate: Authorization = 'OWO'
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - dataform-ippt-uat@pttep-th-corp-ippt-uat.iam.gserviceaccount.com
+                - delorean.ippt.datasupport@pttep.com
+                - delorean.ippt.datauser@pttep.com
+                - dataform-ippt@pttep-th-corp-ippt.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          inclusions:
+            attributes:
+                - name: EntraID.division
+                  value: OSM
+                - name: EntraID.JobTitle
+                  value: SVP, Supply Chain Management Division
+                - name: EntraID.departments
+                  value: '- : -'
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          inclusions:
+            attributes:
+                - name: EntraID.departments
+                  value: 'OSS : OSS/P'
+                - name: EntraID.departments
+                  value: 'OSS : OSS/I'
+                - name: EntraID.departments
+                  value: 'OSS : -'
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          inclusions:
+            groups:
+                - Chanat Koaysomboon
+                - Jirapa Prakartchai
+                - dcoe.marketintelligence.datascience
+                - datasupport.ddo.supplychain@pttep.com
+                - datamart_supplychain.datauser
+                - apihub-bq@pttep-th-corp-apihub.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub-uat.iam.gserviceaccount.com
+                - scm.custodian.datauser
+                - pwp-bq-viewer@pttep-th-corp-pwp.iam.gserviceaccount.com
+                - pwp-bq-viewer@pttep-th-corp-pwp-uat.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "false"
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Environment.PRD
+      type: tags
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.ppf_factsheet_summary
+      type: tags
+    - domains:
+        - name: Procurement
+      type: domains
+name: 'PPF factsheet summary: Official Mart PRD'
+policyKey: 'Ppf factsheet summary: Official Mart PRD'
+staged: false
+template: false
+type: data

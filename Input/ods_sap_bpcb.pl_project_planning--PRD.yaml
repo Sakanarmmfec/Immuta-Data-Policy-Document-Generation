@@ -1,0 +1,20 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-1289
+      rules:
+        - config:
+            fields:
+                - columnTag: Data Entity.ODS_SAP_BPCB.pl_project_planning.value
+                  type: columnTags
+            maskingConfig:
+                type: "Null"
+            operator: any
+          type: Masking
+circumstanceOperator: any
+circumstances:
+    - columnTag: Data Entity.ODS_SAP_BPCB.pl_project_planning.value
+      type: columnTags
+name: ods_sap_bpcb.pl_project_planning PRD
+policyKey: ods_sap_bpcb.pl_project_planning PRD
+staged: false
+template: false
+type: data

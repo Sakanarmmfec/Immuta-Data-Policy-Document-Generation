@@ -1,0 +1,70 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-176
+        https://pttep.atlassian.net/browse/GDS-174
+        https://pttep.atlassian.net/browse/GDS-362
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1119 - DDO-ENG
+        https://pttep.atlassian.net/browse/GDS-1320
+        https://pttep.atlassian.net/browse/GDS-2506
+        https://pttep.atlassian.net/browse/GDS-2637
+        https://pttep.atlassian.net/browse/GDS-3332 - add GGG/O
+      rules:
+        - config:
+            predicate: (( rls_department in ( 'OTF','OTN','OWE','OTF1','OWO' ) or RequisitionTrackingNumber_BEDNR ='OLG/M' ) or (RequisitionTrackingNumber_BEDNR = 'GGG/O'))
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: OTF
+                - name: EntraID.department
+                  value: OTN
+                - name: EntraID.department
+                  value: OWE
+                - name: EntraID.department
+                  value: OTF1
+                - name: EntraID.department
+                  value: OWO
+                - name: EntraID.division
+                  value: OWO
+            groups:
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - delorean.dev.ippt.datauser@pttep.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: (( rls_department in ('EAL', 'EAP', 'EAU', 'ECM', 'ECN', 'EDC', 'EDV', 'EFE', 'EME', 'EMI', 'EMX', 'ETS', 'EWP', 'EDP', 'ENX') or RequisitionTrackingNumber_BEDNR ='OLG/M' ))
+          inclusions:
+            groups:
+                - delorean.ddo.engineeringdevelopment.dataanalyst@pttep.com
+                - dataform-ddo-engineering@pttep-th-corp-dw-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: |-
+                (((@attributeValuesContains('EntraID.department', 'rls_department') or RequisitionTrackingNumber_BEDNR ='OLG/M'))
+                or (@attributeValuesContains('EntraID.department', 'split( RequisitionTrackingNumber_BEDNR, "/") [safe_offset(0)]')))
+          exceptions:
+            groups:
+                - ODC/S data analyst
+                - delorean.dev.apihub.developer@pttep.com
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - dev.msm.datadeveloper@pttep.com
+                - msm-bq-viewer@pttep-th-corp-msm-dev.iam.gserviceaccount.com
+                - composer-scm-marketplace@gcp-pttep-th-it-dp-dev.iam.gserviceaccount.com
+                - dcoe.dev.scmmarketplace.datadeveloper
+                - delorean.dev.scm.developer@pttep.com
+                - apihub-bq@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+                - apihub-bq-scm@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: Data Entity.PO.Table.datamart_supplychain_procurement.pr
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+name: 'PR: Official Mart DEV'
+policyKey: 'PR: Official Mart DEV'
+staged: false
+template: false
+type: data

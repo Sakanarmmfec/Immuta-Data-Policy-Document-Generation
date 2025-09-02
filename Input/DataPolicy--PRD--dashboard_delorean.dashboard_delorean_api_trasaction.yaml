@@ -1,0 +1,26 @@
+actions:
+    - description: |-
+          https://pttep.atlassian.net/browse/GDS-2713
+          https://pttep.atlassian.net/browse/GDS-3136
+      rules:
+        - config:
+            predicate: appName = "ForeSight"
+          inclusions:
+            groups:
+                - pbi-bq-viewer-foresight@gcp-pttep-th-it-delorean.iam.gserviceaccount.com
+                - dashboard_delorean.datauser
+                - cbl-auto-shift-logging@pttep-th-corp-dsworkload-dev.iam.gserviceaccount.com
+            operator: any
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: "true"
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: DATAPOLICY.PRD.dashboard_delorean.dashboard_delorean_api_trasaction
+      type: tags
+name: DataPolicy PRD dashboard_delorean.dashboard_delorean_api_trasaction
+policyKey: DataPolicy PRD dashboard_delorean.dashboard_delorean_api_trasaction
+staged: false
+template: false
+type: data

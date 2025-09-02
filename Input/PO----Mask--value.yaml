@@ -1,0 +1,59 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-256 - Chanat K. All Access
+        https://pttep.atlassian.net/browse/GDS-364
+        https://pttep.atlassian.net/browse/GDS-696
+        https://pttep.atlassian.net/browse/GDS-720 - Jirapa P. All Access
+        https://pttep.atlassian.net/browse/GDS-1023
+        https://pttep.atlassian.net/browse/GDS-1084
+        https://pttep.atlassian.net/browse/GDS-1320
+        https://pttep.atlassian.net/browse/GDS-2506
+      rules:
+        - config:
+            fields:
+                - columnTag: po.value
+                  type: columnTags
+                - columnTag: Data Entity.PO.Value
+                  type: columnTags
+            maskingConfig:
+                constant: "9999.00"
+                type: Constant
+            operator: any
+          exceptions:
+            attributes:
+                - name: EntraID.department
+                  value: OPC
+            groups:
+                - Chanat Koaysomboon
+                - delorean.dev.scm.developer@pttep.com
+                - 'DEV: Service-Account'
+                - delorean.dev.ippt.datadeveloper@pttep.com
+                - dataform-ippt-dev@pttep-th-corp-ippt-dev.iam.gserviceaccount.com
+                - sshecn-bq-viewer@pttep-th-corp-sshecn-dev.iam.gserviceaccount.com
+                - Jirapa Prakartchai
+                - tms-bq-viewer@pttep-th-corp-tms-dev.iam.gserviceaccount.com
+                - delorean.dev.ippt.datauser@pttep.com
+                - dcoe.dev.scmmarketplace.datadeveloper
+                - composer-scm-marketplace@gcp-pttep-th-it-dp-dev.iam.gserviceaccount.com
+                - delorean.dev.scm.developer@pttep.com
+                - apihub-bq@pttep-th-corp-apihub-dev.iam.gserviceaccount.com
+            operator: any
+          type: Masking
+circumstanceOperator: all
+circumstances:
+    - columnTag: Data Entity.PO.Value
+      type: columnTags
+    - tag: Environment.DEV
+      type: tags
+    - columnTag: Data Entity.PO.Plant
+      type: columnTags
+    - columnTag: Data Entity.PO.Date
+      type: columnTags
+    - domains:
+        - id: 763d0faa-6746-4106-9c6a-c6981a5f35a8
+      type: domains
+name: 'PO: Mask value DEV'
+policyKey: 'PO: Mask value'
+staged: false
+template: false
+type: data

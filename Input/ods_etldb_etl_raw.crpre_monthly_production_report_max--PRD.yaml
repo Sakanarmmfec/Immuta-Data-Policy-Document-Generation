@@ -1,0 +1,17 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-127
+      rules:
+        - config:
+            predicate: FIELD = 'S1'
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: ODS.ETLDB.etl_raw.crpre_monthly_production_report_max
+      type: tags
+    - tag: Environment.PRD
+      type: tags
+name: ods_etldb_etl_raw.crpre_monthly_production_report_max PRD
+policyKey: ods_etldb_etl_raw.crpre_monthly_production_report_max PRD
+staged: false
+template: false
+type: data

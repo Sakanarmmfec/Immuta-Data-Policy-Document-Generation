@@ -1,0 +1,17 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-127
+      rules:
+        - config:
+            predicate: asset = 'S1'
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: all
+circumstances:
+    - tag: DATAMART.PRODUCTION PLANNING.monthly_mpr_target_pivot
+      type: tags
+    - tag: Environment.DEV
+      type: tags
+name: 'datamart_production_planning.monthly_mpr_target_pivot: DEV'
+policyKey: 'datamart_production_planning.monthly_mpr_target_pivot: DEV'
+staged: false
+template: false
+type: data

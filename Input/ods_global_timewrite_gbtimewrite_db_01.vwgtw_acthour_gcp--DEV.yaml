@@ -1,0 +1,15 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-744
+      rules:
+        - config:
+            predicate: DIVID in (30000016, 30000057, 30000053, 30000052, 30000020, 30000054) or DeptID in (40000119, 40000017, 40000134, 40000156, 40000155, 40000069, 40000110, 40000136, 40000049, 40000070, 40000089)
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: ODS.DEV.GLOBALTIMEWRITE.gbtimewrite db01.vwgtw_acthour_gcp
+      type: tags
+name: ods_global_timewrite_gbtimewrite_db_01.vwgtw_acthour_gcp DEV
+policyKey: ods_global_timewrite_gbtimewrite_db_01.vwgtw_acthour_gcp DEV
+staged: false
+template: false
+type: data

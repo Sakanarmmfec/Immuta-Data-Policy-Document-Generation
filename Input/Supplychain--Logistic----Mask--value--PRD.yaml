@@ -1,0 +1,37 @@
+actions:
+    - description: https://pttep.atlassian.net/browse/GDS-673
+      rules:
+        - config:
+            fields:
+                - columnTag: Data Entity.SUPPLYCHAIN_LOGISTIC.value
+                  type: columnTags
+            maskingConfig:
+                sqlFunction: '@column'
+                type: Custom Function
+            operator: any
+          inclusions:
+            attributes:
+                - name: EntraID.CompanyName
+                  value: PTTEP
+            operator: any
+          type: Masking
+        - config:
+            fields:
+                - columnTag: Data Entity.SUPPLYCHAIN_LOGISTIC.value
+                  type: columnTags
+            maskingConfig:
+                sqlFunction: FARM_FINGERPRINT(CAST(ROUND(@column, 1) AS STRING))
+                type: Custom Function
+            operator: any
+          type: Masking
+circumstanceOperator: all
+circumstances:
+    - tag: DATAMART.PRD.SUPPLYCHAIN LOGISTIC
+      type: tags
+    - columnTag: Data Entity.SUPPLYCHAIN_LOGISTIC.value
+      type: columnTags
+name: 'Supplychain Logistic: Mask value PRD'
+policyKey: 'Supplychain Logistic: Mask value PRD'
+staged: true
+template: false
+type: data

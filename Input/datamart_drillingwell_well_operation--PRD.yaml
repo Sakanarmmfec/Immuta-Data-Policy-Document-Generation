@@ -1,0 +1,57 @@
+actions:
+    - description: |-
+        https://pttep.atlassian.net/browse/GDS-1653
+        https://pttep.atlassian.net/browse/GDS-1817
+      rules:
+        - config:
+            predicate: Asset IN ('G1/61')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFP1
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset IN  ('G2/61')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFP2
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset IN  ('ARTHIT')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PFP3
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: LocationBase = 'ONSHORE'
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: PNP
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: Asset IN ('G1/61','G2/61','ARTHIT')
+          inclusions:
+            attributes:
+                - name: EntraID.department
+                  value: GIS
+            operator: all
+          type: Row Restriction by Custom Where Clause
+        - config:
+            predicate: 1=1
+          type: Row Restriction by Custom Where Clause
+circumstanceOperator: any
+circumstances:
+    - tag: gcp-pttep-th-it-dp-prd.datamart_drillingwell_well_operation
+      type: tags
+name: datamart_drillingwell_well_operation PRD
+policyKey: datamart_drillingwell_well_operation PRD
+staged: false
+template: false
+type: data
